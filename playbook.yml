@@ -4,12 +4,7 @@
       become: true
       template:
         src: web.rb
-        dest: /usr/bin/ruby /home/vagrant/web.rb
-    - name: create simple service template
-      become: true
-      template:
-        src: sample.service.j2
-        dest: /etc/systemd/system/sample.service
+        dest: /usr/bin/ruby /home/vagrant/web.r
     - name: run samole service
       become: true
       ansible.builtin.systemd:
