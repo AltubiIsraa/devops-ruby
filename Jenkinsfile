@@ -3,7 +3,7 @@ pipeline{
             stages{
                stage('Build'){
                    steps{
-                      sh 'go build -o main.rb'
+                      sh 'ruby main.rb'
                         }
                  }
 
