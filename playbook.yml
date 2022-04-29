@@ -4,7 +4,7 @@
       become: true
       template:
         src: main.rb
-        dest: /usr/bin/ruby /home/vagrant/web.r
+        dest: /usr/bin/ ruby/home/vagrant/web.r
     - name: run samole service
       become: true
       ansible.builtin.systemd:
