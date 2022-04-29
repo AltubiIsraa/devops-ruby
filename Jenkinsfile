@@ -9,7 +9,12 @@ pipeline{
     				)
 }
            stages{
-
+ 		  stage('Copy artifact'){
+                 steps {
+        copyArtifacts filter: 'sample-ruby', fingerprintArtifacts: true,
+          projectName: 'ruby', selector: lastSuccessful()
+      }
+ }
               stage('Deliver'){
                steps {
         sshagent(['vagrant-private-key']) {
