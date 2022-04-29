@@ -8,7 +8,7 @@ pipeline{
               stage('Deliver'){
                steps {
         sshagent(['vagrant-private-key']) {
-          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${DEPLOY_TO}.ini'
+          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${DEPLOY_TO}.ini  playbook.yml'
         }
                 }
               }  
