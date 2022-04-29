@@ -8,7 +8,7 @@ pipeline{
 //                 }
                stage('Build'){
                    steps{
-                      sh 'go build -o sample1 main.go'
+                      sh 'go build -o sample1 main.rb'
                         }
                  }
 //                 stage('Save srtifact'){
