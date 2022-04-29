@@ -1,7 +1,12 @@
 pipeline{
         agent any
         parameters {
-  choice choices: ['qa', 'production'], description: 'deploying ruby', name: 'DEPLOY'
+  choice choices: ['qa', 'production', 'clude'], description: 'deploying ruby', name: 'DEPLOY'
+                
+                			string(name: 'upstreamJobName',
+          			defaultValue: '',
+          			description: 'The name of the job the triggering upstream build'
+    				)
 }
            stages{
 
