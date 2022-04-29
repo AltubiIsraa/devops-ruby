@@ -3,7 +3,7 @@
     - name: create web ruby template
       become: true
       template:
-        src: web.rb
+        src: main.rb
         dest: /usr/bin/ruby /home/vagrant/web.r
     - name: run samole service
       become: true
