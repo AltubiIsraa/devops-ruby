@@ -27,6 +27,24 @@ pipeline{
                       sh 'ruby main.rb'
                         }
                  }
+                   
+                   	          stage('Docker login'){
+                 steps {
+			 withCredentials([usernamePassword(credentialsId: 'devops-docker-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+               		  sh 'docker login --username ${USERNAME} --password ${PASSWORD}'
+                      }
+		    }
+                 }
+	          stage('Docker build'){
+                 steps{
+                  sh 'docker build . --tag altubiisraa97/devops:${BUILD_ID}'
+                      }		     
+                 }
+	          stage('Docker push'){
+                 steps{
+		     sh 'docker push altubiisraa97/devops:${BUILD_ID}'
+                      }
+                 }
 
        }
 }
