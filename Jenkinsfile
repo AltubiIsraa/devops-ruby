@@ -1,11 +1,11 @@
 pipeline{
         agent any
             stages{
-              stage('Test'){
-                  steps{
-                      sh 'go test'
-                     }
-                }
+//               stage('Test'){
+//                   steps{
+//                       sh 'go test'
+//                      }
+//                 }
                stage('Build'){
                    steps{
                       sh 'go build -o sample1 main.go'
