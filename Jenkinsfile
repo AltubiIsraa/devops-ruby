@@ -1,34 +1,56 @@
 pipeline{
         agent any
-	stages{
-		stage('Build'){
-                 steps{
-                      sh 'go build -o sample1 main.rb'
+            stages{
+              stage('Test'){
+                  steps{
+                      sh 'go test'
+                     }
+                }
+               stage('Build'){
+                   steps{
+                      sh 'go build -o sample1 main.go'
                         }
                  }
-
-// 		parameters {
-//   		 choice choices: ['qa', 'production'], description: 'Select environment for deployment', name: 'DEPLOY_TO'
-// 			string(name: 'upstreamJobName',
-//           			defaultValue: '',
-//           			description: 'The name of the job the triggering upstream build'
-//     				)		
-// 		}
-
-//             stages{
-//  		  stage('Copy artifact'){
+//                 stage('Save srtifact'){
+//                     steps{
+//                       archiveArtifacts artifacts: 'sample1', followSymlinks: false
+//                      }
+//                  }
+// 		    stage('Run qa deployment'){
+// 			when {
+// 			  not {
+// 			    branch 'master'
+// 			  }
+// 			}
+// 			steps{
+// 			    build job: 'sample-deploy', parameters: [string(name: 'DEPLOY_TO', value: 'qa'), string(name: 'upstreamJobName', value: BRANCH_NAME)]
+// 		      }
+// 		    }
+// 		    stage('Run production deployment'){
+// 			     when {
+// 				  branch 'master'
+// 				}
+// 			steps{
+// 			    build job: 'sample-deploy', parameters: [string(name: 'DEPLOY_TO', value: 'production'),
+// 				                                      string(name: 'upstreamJobName', value: BRANCH_NAME)]
+// 		      }
+// 		    }
+// 	          stage('Docker login'){
 //                  steps {
-//         copyArtifacts filter: 'sample1', fingerprintArtifacts: true,
-//           projectName: "sample-multibranch/${params.upstreamJobName}", selector: lastSuccessful()
-//       }
-//  }
-			   
-//               stage('Deliver'){
-//                steps {
-//         sshagent(['vagrant-private-key']) {
-//           sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${DEPLOY_TO}.ini playbook.yml'
-//         }
-//                 }
-//             }
-      }
+// 			 withCredentials([usernamePassword(credentialsId: 'devops-docker-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+//                		  sh 'docker login --username ${USERNAME} --password ${PASSWORD}'
+//                       }
+// 		    }
+//                  }
+// 	          stage('Docker build'){
+//                  steps{
+//                   sh 'docker build . --tag altubiisraa97/devops:${BUILD_ID}'
+//                       }		     
+//                  }
+// 	          stage('Docker push'){
+//                  steps{
+// 		     sh 'docker push altubiisraa97/devops:${BUILD_ID}'
+//                       }
+//                  }
+        }
 }
