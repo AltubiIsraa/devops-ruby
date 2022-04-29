@@ -1,6 +1,6 @@
 - hosts: target
   tasks:
-    - name: create simple service template
+    - name: create web ruby template
       become: true
       template:
         src: web.rb
