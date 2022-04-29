@@ -1,11 +1,11 @@
 pipeline{
         agent any
             stages{
-               stage('Build'){
-                   steps{
-                      sh 'ruby main.rb'
-                        }
-                 }
+//                stage('Build'){
+//                    steps{
+//                       sh 'ruby main.rb'
+//                         }
+//                  }
 
         }
 }
